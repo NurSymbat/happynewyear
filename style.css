@@ -3,99 +3,120 @@
     padding: 0;
     box-sizing: border-box;
 }
+
 body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    background: linear-gradient(to bottom, #070e18, #0d1521, #000000);
+    background: linear-gradient(to bottom, #070e18, #0d1521, #000000); 
     font-family: 'Forum', serif;
     color: white;
     overflow-y: auto;
     overflow-x: hidden;
 }
+
 .container {
     text-align: center;
-    padding: 15vh 20px 5vh;
-    width: 100%;
+    padding: 15vh 20px 10vh;
     max-width: 95%;
 }
+
 h1 {
-    font-family: 'Forum', serif;
+    font-family: 'Forum';
     font-size: 4em;
-    margin-bottom: 40px;
-    font-weight: normal;
+    margin-bottom: 30px;
+    color: #ffffff;             
+    text-shadow: none;           
 }
+
 .tree {
-    margin: 40px 0;
+    margin: 20px 0;
 }
+
 .tree img {
     max-width: 90vw;
-    max-height: 70vh;
+    max-height: 60vh;          
     width: auto;
     height: auto;
     display: block;
     margin: 0 auto;
+    border-radius: 0px;
     position: relative;
     z-index: 20;
 }
+
 #lyrics {
-    font-family: 'Forum', serif;
+    font-family: 'Forum';
     font-size: 2.2em;
-    margin-top: 60px;
+    margin-top: 50px;
     min-height: 80px;
-    font-weight: normal;
-    opacity: 1;
-    transition: none;
+    color: #ffffff;
+    text-shadow: none;           
+    opacity: 1;                    
+    transition: none;              
 }
+
 .snowflake {
     position: absolute;
-    top: -20px;
+    top: -20px;                   
     color: #ffffff;
-    font-size: 0.8em;
-    opacity: 0.7;
-    pointer-events: none;
+    font-size: 0.8em;           
+    opacity: 0.7;                
+    pointer-events: none;        
     animation: fall linear infinite;
-    z-index: 10;
+    z-index: 10;                  
 }
+
 @keyframes fall {
-    to { transform: translateY(105vh) rotate(360deg); }
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+    100% {
+        transform: translateY(105vh) rotate(360deg);
+    }
 }
+
 .greeting-section {
-    width: 100%;
-    padding: 80px 20px 120px;
+    min-height: 100vh;
     display: flex;
+    padding: 100px 20px 150px;
     justify-content: center;
-    align-items: flex-start;
-    background: linear-gradient(to top, #000000, #0d1521);
+    align-items: center;
+    background: linear-gradient(to top, #000000, #0d1521); 
     position: relative;
 }
+
 .greeting-text {
     max-width: 800px;
     text-align: center;
+    color: #ffffff;
     opacity: 0;
-    transform: translateY(50px);
+    transform: translateY(50px); 
     transition: all 1.5s ease-out;
 }
+
 .greeting-text.visible {
     opacity: 1;
     transform: translateY(0);
 }
+
 .greeting-text h2 {
-    font-family: 'Forum', serif;
-    font-size: 2.8em;
+    font-family: 'Forum';
+    font-size: 3em;
     font-weight: normal;
-    margin-bottom: 30px;
-    color: #ffd700;
+    margin-bottom: 10px;
+    color: #ffffff;
 }
+
 .greeting-text p {
-    font-family: 'Comfortaa', cursive;
-    font-size: 1.7em;
+    font-family: 'Forum';
+    font-size: 1.8em;
     line-height: 1.6;
-    margin-bottom: 25px;
-    font-weight: 400;
+    margin-bottom: 6px;
 }
+
 .greeting-decor {
     position: absolute;
     font-size: 3em;
@@ -104,31 +125,20 @@ h1 {
     animation: float 15s ease-in-out infinite;
     z-index: 5;
 }
-.greeting-decor.left { left: 8%; top: 20%; }
-.greeting-decor.right { right: 8%; top: 40%; animation-delay: 5s; }
-.greeting-decor.small { font-size: 2em; left: 12%; top: 70%; animation-delay: 8s; }
+
+.greeting-decor.left { left: 10%; top: 30%; animation-delay: 0s; }
+.greeting-decor.right { right: 10%; top: 50%; animation-delay: 5s; }
+.greeting-decor.small { font-size: 2em; left: 15%; top: 70%; animation-delay: 8s; }
+
 @keyframes float {
     0%, 100% { transform: translateY(0) rotate(0deg); }
     50% { transform: translateY(-30px) rotate(180deg); }
 }
+
 @media (max-width: 768px) {
-    h1 {
-        font-size: 2.8em;
-    }
-    #lyrics {
-        font-size: 1.6em;
-        margin-top: 40px;
-    }
-    .tree img {
-        max-height: 55vh;
-    }
-    .greeting-section {
-        padding: 60px 20px 80px;
-    }
-    .greeting-text h2 {
-        font-size: 2.2em;
-    }
-    .greeting-text p {
-        font-size: 1.4em;
-    }
+    h1 { font-size: 3em; }
+    #lyrics { font-size: 1.8em; }
+    .tree img { max-height: 60vh; }
+    .greeting-text h2 { font-size: 2.5em; }
+    .greeting-text p { font-size: 1.5em; }
 }
