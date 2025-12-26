@@ -7,7 +7,7 @@ const lyrics = [
     { text: "this year,", time: 2000 },
     { text: "to save me from tears", time: 2000 },
     { text: "I'll give it to someone special", time: 3065 },
-    { text: "", time: 1260 },               
+    { text: "", time: 1260 },
     { text: "last christmas,", time: 1990 },
     { text: "I gave you my heart", time: 1995 },
     { text: "but the very next day,", time: 2100 },
@@ -24,24 +24,14 @@ function showNextLine() {
     if (index < lyrics.length) {
         const line = lyrics[index];
         lyricsDiv.textContent = line.text;
-        lyricsDiv.classList.remove('visible');
-        setTimeout(() => {
-            lyricsDiv.classList.add('visible');
-        }, 100);
         index++;
         const delay = line.time || 3500;
-
         setTimeout(showNextLine, delay);
-    } else {
-        setTimeout(() => {
-            index = 0;
-            showNextLine();
-        }, 100);
     }
 }
 const music = document.getElementById('music');
 document.body.addEventListener('click', () => {
-    music.play().catch(() => {}); 
+    music.play().catch(() => {});
 }, { once: true });
 window.addEventListener('load', () => {
     setTimeout(showNextLine, 1000);
@@ -56,18 +46,17 @@ function createSnowflake() {
     snowflake.style.fontSize = (Math.random() * 0.6 + 0.6) + 'em';
     snowflake.style.opacity = Math.random() * 0.4 + 0.4;
     document.body.appendChild(snowflake);
-    setTimeout(() => {
-        snowflake.remove();
-    }, 25000);
+    setTimeout(() => snowflake.remove(), 25000);
 }
 setInterval(createSnowflake, 650);
 const greetingText = document.querySelector('.greeting-text');
 function checkScroll() {
+    if (!greetingText) return;
     const rect = greetingText.getBoundingClientRect();
-    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-    if (rect.top <= windowHeight * 0.8) {  
+    const windowHeight = window.innerHeight;
+    if (rect.top <= windowHeight * 0.8) {
         greetingText.classList.add('visible');
     }
 }
 window.addEventListener('scroll', checkScroll);
-window.addEventListener('load', checkScroll); 
+window.addEventListener('load', checkScroll);
