@@ -1,41 +1,49 @@
 const lyrics = [
-    { text: "last christmas,", time: 1990 },
-    { text: "I gave you my heart", time: 1993 },
-    { text: "but the very next day,", time: 2067 },
-    { text: "you gave it away", time: 2000 },
-    { text: "", time: 1000 },
-    { text: "this year,", time: 2000 },
-    { text: "to save me from tears", time: 2000 },
-    { text: "I'll give it to someone special", time: 3065 },
-    { text: "", time: 1260 },
-    { text: "last christmas,", time: 1990 },
-    { text: "I gave you my heart", time: 1995 },
-    { text: "but the very next day,", time: 2100 },
-    { text: "you gave it away", time: 2000 },
-    { text: "", time: 1000 },
-    { text: "this year,", time: 2000 },
-    { text: "to save me from tears", time: 2000 },
-    { text: "I'll give it to someone special", time: 3040 },
-    { text: "", time: 1000 }
+    { text: "last christmas,", time: 16 },
+    { text: "I gave you my heart", time: 18 },
+    { text: "but the very next day,", time: 21 },
+    { text: "you gave it away", time: 23 },
+    { text: "", time: 26 },
+    { text: "this year,", time: 28 },
+    { text: "to save me from tears", time: 30 },
+    { text: "I'll give it to someone special", time: 32 },
+    { text: "", time: 36 },
+    { text: "last christmas,", time: 65 },
+    { text: "I gave you my heart", time: 67 },
+    { text: "but the very next day,", time: 70 },
+    { text: "you gave it away", time: 72 },
+    { text: "", time: 75 },
+    { text: "this year,", time: 77 },
+    { text: "to save me from tears", time: 79 },
+    { text: "I'll give it to someone special", time: 81 },
+    { text: "", time: 85 }
 ];
+
 const lyricsDiv = document.getElementById('lyrics');
-let index = 0;
-function showNextLine() {
-    if (index < lyrics.length) {
-        const line = lyrics[index];
-        lyricsDiv.textContent = line.text;
-        index++;
-        const delay = line.time || 3500;
-        setTimeout(showNextLine, delay);
+const music = document.getElementById('music');
+let currentLine = 0;
+
+function updateLyrics() {
+    const currentTime = music.currentTime;
+    for (let i = 0; i < lyrics.length; i++) {
+        if (currentTime >= lyrics[i].time && (i === lyrics.length - 1 || currentTime < lyrics[i + 1].time)) {
+            if (i !== currentLine) {
+                lyricsDiv.textContent = lyrics[i].text;
+                currentLine = i;
+            }
+            break;
+        }
     }
 }
-const music = document.getElementById('music');
+
+music.addEventListener('timeupdate', updateLyrics);
+music.addEventListener('play', updateLyrics);
+music.addEventListener('seeked', updateLyrics);
+
 document.body.addEventListener('click', () => {
     music.play().catch(() => {});
 }, { once: true });
-window.addEventListener('load', () => {
-    setTimeout(showNextLine, 1000);
-});
+
 function createSnowflake() {
     const snowflake = document.createElement('div');
     snowflake.classList.add('snowflake');
@@ -49,6 +57,7 @@ function createSnowflake() {
     setTimeout(() => snowflake.remove(), 25000);
 }
 setInterval(createSnowflake, 650);
+
 const greetingText = document.querySelector('.greeting-text');
 function checkScroll() {
     if (!greetingText) return;
