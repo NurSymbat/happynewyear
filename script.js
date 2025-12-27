@@ -1,4 +1,5 @@
 const lyrics = [
+    { text: "", time: 0 },
     { text: "last christmas,", time: 16 },
     { text: "I gave you my heart", time: 18 },
     { text: "but the very next day,", time: 21 },
@@ -21,28 +22,40 @@ const lyrics = [
 
 const lyricsDiv = document.getElementById('lyrics');
 const music = document.getElementById('music');
-let currentLine = 0;
+let currentLine = -1;
 
 function updateLyrics() {
-    const currentTime = music.currentTime;
+    const currentTime = music.currentTime || 0;
+    let found = false;
     for (let i = 0; i < lyrics.length; i++) {
         if (currentTime >= lyrics[i].time && (i === lyrics.length - 1 || currentTime < lyrics[i + 1].time)) {
             if (i !== currentLine) {
                 lyricsDiv.textContent = lyrics[i].text;
                 currentLine = i;
             }
+            found = true;
             break;
         }
+    }
+    if (!found && currentLine !== 0) {
+        lyricsDiv.textContent = lyrics[0].text;
+        currentLine = 0;
     }
 }
 
 music.addEventListener('timeupdate', updateLyrics);
 music.addEventListener('play', updateLyrics);
 music.addEventListener('seeked', updateLyrics);
+music.addEventListener('loadstart', updateLyrics);
 
 document.body.addEventListener('click', () => {
     music.play().catch(() => {});
+    updateLyrics();
 }, { once: true });
+
+window.addEventListener('load', () => {
+    updateLyrics();
+});
 
 function createSnowflake() {
     const snowflake = document.createElement('div');
