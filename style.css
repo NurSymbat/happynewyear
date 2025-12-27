@@ -36,8 +36,6 @@ h1 {
 }
 
 .tree img {
-    max-width: 90vw;
-    max-height: 60vh;          
     width: auto;
     height: auto;
     display: block;
@@ -103,7 +101,7 @@ h1 {
 
 .greeting-text h2 {
     font-family: 'Forum';
-    font-size: 2em;
+    font-size: 1.2em;
     font-weight: normal;
     margin-bottom: 10px;
     color: #ffffff;
@@ -141,3 +139,4 @@ h1 {
     .greeting-text h2 { font-size: 2.5em; }
     .greeting-text p { font-size: 1.5em; }
 } */
+
