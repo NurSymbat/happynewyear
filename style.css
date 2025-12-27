@@ -10,25 +10,27 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    background: linear-gradient(to bottom, #070e18, #0d1521, #000000); 
+    background: linear-gradient(to bottom, #070e18, #0d1521, #000000);
     font-family: 'Forum', serif;
     color: white;
     overflow-y: auto;
     overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; /* Фикс скролла на iOS */
 }
 
 .container {
     text-align: center;
     padding: 15vh 20px 10vh;
     max-width: 95%;
+    width: 100%;
 }
 
 h1 {
     font-family: 'Forum';
     font-size: 4em;
     margin-bottom: 30px;
-    color: #ffffff;             
-    text-shadow: none;           
+    color: #ffffff;
+    text-shadow: none;
 }
 
 .tree {
@@ -37,14 +39,18 @@ h1 {
 
 .tree img {
     max-width: 90vw;
-    max-height: 60vh;          
+    max-height: 60vh;
     width: auto;
     height: auto;
     display: block;
     margin: 0 auto;
     border-radius: 0px;
     position: relative;
-    z-index: 20;
+    z-index: 30; /* Выше всех снежинок */
+    transform: translateZ(0); /* Ключевой фикс для мобильных! */
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 #lyrics {
@@ -53,25 +59,25 @@ h1 {
     margin-top: 50px;
     min-height: 80px;
     color: #ffffff;
-    text-shadow: none;           
-    opacity: 1;                    
-    transition: none;              
+    text-shadow: none;
+    opacity: 1;
+    transition: none;
 }
 
 .snowflake {
-    position: absolute;
-    top: -20px;                   
+    position: fixed;
+    top: -20px;
     color: #ffffff;
-    font-size: 0.8em;           
-    opacity: 0.7;                
-    pointer-events: none;        
+    font-size: 0.8em;
+    opacity: 0.7;
+    pointer-events: none;
     animation: fall linear infinite;
-    z-index: 10;                  
+    z-index: 10;
 }
 
 @keyframes fall {
     0% {
-        transform: translateY(0) rotate(0deg);
+        transform: translateY(-100px) rotate(0deg);
     }
     100% {
         transform: translateY(105vh) rotate(360deg);
@@ -84,7 +90,7 @@ h1 {
     padding: 100px 20px 150px;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(to top, #000000, #0d1521); 
+    background: linear-gradient(to top, #000000, #0d1521);
     position: relative;
 }
 
@@ -93,7 +99,7 @@ h1 {
     text-align: center;
     color: #ffffff;
     opacity: 0;
-    transform: translateY(50px); 
+    transform: translateY(50px);
     transition: all 1.5s ease-out;
 }
 
@@ -117,6 +123,7 @@ h1 {
     margin-bottom: 6px;
 }
 
+/* Декоративные снежинки */
 .greeting-decor {
     position: absolute;
     font-size: 3em;
@@ -135,10 +142,31 @@ h1 {
     50% { transform: translateY(-30px) rotate(180deg); }
 }
 
+/* Адаптивность — текст на телефоне стал меньше */
 @media (max-width: 768px) {
-    h1 { font-size: 3em; }
-    #lyrics { font-size: 1.8em; }
-    .tree img { max-height: 60vh; }
-    .greeting-text h2 { font-size: 2.5em; }
-    .greeting-text p { font-size: 1.5em; }
+    h1 {
+        font-size: 2.8em;
+    }
+
+    #lyrics {
+        font-size: 1.6em;
+        margin-top: 30px;
+    }
+
+    .tree img {
+        max-height: 50vh;
+    }
+
+    .greeting-section {
+        padding: 80px 20px 100px;
+    }
+
+    .greeting-text h2 {
+        font-size: 2.2em;
+    }
+
+    .greeting-text p {
+        font-size: 1.3em; 
+        line-height: 1.5;
+    }
 }
