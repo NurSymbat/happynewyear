@@ -43,7 +43,8 @@ h1 {
     display: block;
     margin: 0 auto;
     border-radius: 0px;
-    transform: translateZ(0);
+    position: relative;
+    z-index: 20;
 }
 
 #lyrics {
@@ -78,9 +79,9 @@ h1 {
 }
 
 .greeting-section {
-    min-height: 100vh;
+    min-height: 10vh;
     display: flex;
-    padding: 100px 20px 150px;
+    padding: 10px 20px 150px;
     justify-content: center;
     align-items: center;
     background: linear-gradient(to top, #000000, #0d1521); 
@@ -91,25 +92,28 @@ h1 {
     max-width: 800px;
     text-align: center;
     color: #ffffff;
-    opacity: 0;
     transform: translateY(50px); 
     transition: all 1.5s ease-out;
 }
 
-.greeting-text.visible {
+/* .greeting-text.visible {
     opacity: 1;
     transform: translateY(0);
+} */
+
+.greeting-text h2 {
+    font-family: 'Forum';
+    font-size: 2em;
+    font-weight: normal;
+    margin-bottom: 10px;
+    color: #ffffff;
 }
 
-.greeting-text h2,
 .greeting-text p {
     font-family: 'Forum';
-    font-size: 2.2em;
-    color: #ffffff;
-    text-shadow: none;
-    font-weight: normal;
-    line-height: 1.6;
-    margin-bottom: 20px;
+    font-size: 1.5em;
+    /* line-height: 1.6; */
+    margin-bottom: 6px;
 }
 
 .greeting-decor {
@@ -129,3 +133,11 @@ h1 {
     0%, 100% { transform: translateY(0) rotate(0deg); }
     50% { transform: translateY(-30px) rotate(180deg); }
 }
+
+/* @media (max-width: 768px) {
+    h1 { font-size: 3em; }
+    #lyrics { font-size: 1.8em; }
+    .tree img { max-height: 60vh; }
+    .greeting-text h2 { font-size: 2.5em; }
+    .greeting-text p { font-size: 1.5em; }
+} */
