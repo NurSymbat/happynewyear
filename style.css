@@ -4,6 +4,12 @@
     box-sizing: border-box;
 }
 
+html {
+    background: #000000; 
+    margin: 0;
+    padding: 0;
+}
+
 body {
     min-height: 100vh;
     display: flex;
@@ -14,7 +20,11 @@ body {
     font-family: 'Forum', serif;
     color: white;
     overflow-y: auto;
-    overflow-x: hidden;
+    overflow-x: hidden; 
+    min-width: 100vw;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
 }
 
 .container {
@@ -161,3 +171,4 @@ h1 {
         padding: 60px 15px 100px;
     }
 }
+
