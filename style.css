@@ -53,7 +53,7 @@ h1 {
     border-radius: 0px;
     position: relative;
     z-index: 20;
-    transform: translateZ(0); /* Фикс дёрганья/увеличения на телефоне */
+    transform: translateZ(0); 
 }
 
 #lyrics {
@@ -87,7 +87,6 @@ h1 {
     }
 }
 
-/* Убрана отдельная секция с фоном — теперь всё на общем фоне */
 .greeting-section {
     width: 100%;
     padding: 80px 20px 120px; /* Отступы для воздуха */
@@ -111,23 +110,21 @@ h1 {
     transform: translateY(0);
 }
 
-/* Заголовок "ДОРОГИЕ ДРУЗЬЯ" в одну строку */
 .greeting-text h2 {
     font-family: 'Forum';
-    font-size: 1.8em;           /* Уменьшили, чтобы влезало в строку */
+    font-size: 1.8em;      
     font-weight: normal;
     margin-bottom: 30px;
     color: #ffffff;
-    white-space: nowrap;        /* Запрещаем перенос строки */
+    white-space: nowrap;      
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-/* Основной текст поздравления */
 .greeting-text p {
     font-family: 'Forum';
-    font-size: 1.6em;           /* Читаемо, но не слишком крупно */
-    line-height: 1.6;
+    font-size: 1.6em;        
+    line-height: 1;
     margin-bottom: 25px;
 }
 
@@ -149,7 +146,7 @@ h1 {
     50% { transform: translateY(-30px) rotate(180deg); }
 }
 
-/* Адаптивность для телефона */
+
 @media (max-width: 768px) {
     h1 {
         font-size: 3em;
@@ -171,4 +168,5 @@ h1 {
         padding: 60px 15px 100px;
     }
 }
+
 
