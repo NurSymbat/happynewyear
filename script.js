@@ -36,10 +36,6 @@ function showNextLine() {
         const delay = line.time || 3500;
         setTimeout(showNextLine, delay);
     } else {
-        setTimeout(() => {
-            index = 0;
-            showNextLine();
-        }, 100);
     }
 }
 
@@ -75,6 +71,7 @@ function checkScroll() {
 }
 window.addEventListener('scroll', checkScroll);
 window.addEventListener('load', checkScroll);
+
 
 
 
