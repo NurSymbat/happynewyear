@@ -1,5 +1,5 @@
 const lyrics = [
-    { text: "last christmas,", time: 1990 },
+    { text: "last christmas,", time: 0 },
     { text: "I gave you my heart", time: 1993 },
     { text: "but the very next day,", time: 2067 },
     { text: "you gave it away", time: 2000 },
@@ -75,3 +75,4 @@ function checkScroll() {
 }
 window.addEventListener('scroll', checkScroll);
 window.addEventListener('load', checkScroll);
+
