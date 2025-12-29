@@ -55,6 +55,7 @@ h1 {
     z-index: 20;
     transform: translateZ(0); 
 }
+
 .play-button {
     margin-top: 40px;
     font-family: 'Forum';
@@ -68,6 +69,12 @@ h1 {
     border-radius: 15px;
     transition: all 0.3s ease;
 }
+
+.play-button:hover {
+    background: rgba(255, 215, 0, 0.2);
+    transform: scale(1.05);
+}
+
 #lyrics {
     font-family: 'Forum';
     font-size: 2.2em;
@@ -180,6 +187,7 @@ h1 {
         padding: 60px 15px 100px;
     }
 }
+
 
 
 
