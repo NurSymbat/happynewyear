@@ -45,8 +45,10 @@ function showNextLine() {
 
 playButton.addEventListener('click', () => {
     music.play().catch(() => {});
-    setTimeout(showNextLine, 1000);
-    playButton.style.display = 'none'; // Скрываем кнопку после нажатия
+    index = 0;
+    lyricsDiv.textContent = "";
+    showNextLine();  
+    playButton.style.display = 'none';
 });
 
 function createSnowflake() {
@@ -67,7 +69,7 @@ const greetingText = document.querySelector('.greeting-text');
 function checkScroll() {
     const rect = greetingText.getBoundingClientRect();
     const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-    if (rect.top <= windowHeight * 0.8) {  
+    if (rect.top <= windowHeight * 0.8) {
         greetingText.classList.add('visible');
     }
 }
