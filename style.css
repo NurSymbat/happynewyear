@@ -1,84 +1,171 @@
-const lyrics = [
-    { text: "", time: 0 },
-    { text: "last christmas,", time: 16 },
-    { text: "I gave you my heart", time: 18 },
-    { text: "but the very next day,", time: 21 },
-    { text: "you gave it away", time: 23 },
-    { text: "", time: 26 },
-    { text: "this year,", time: 28 },
-    { text: "to save me from tears", time: 30 },
-    { text: "I'll give it to someone special", time: 32 },
-    { text: "", time: 36 },
-    { text: "last christmas,", time: 65 },
-    { text: "I gave you my heart", time: 67 },
-    { text: "but the very next day,", time: 70 },
-    { text: "you gave it away", time: 72 },
-    { text: "", time: 75 },
-    { text: "this year,", time: 77 },
-    { text: "to save me from tears", time: 79 },
-    { text: "I'll give it to someone special", time: 81 },
-    { text: "", time: 85 }
-];
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-const lyricsDiv = document.getElementById('lyrics');
-const music = document.getElementById('music');
-let currentLine = -1;
+html {
+    background: #000000; 
+    margin: 0;
+    padding: 0;
+}
 
-function updateLyrics() {
-    const currentTime = music.currentTime || 0;
-    let found = false;
-    for (let i = 0; i < lyrics.length; i++) {
-        if (currentTime >= lyrics[i].time && (i === lyrics.length - 1 || currentTime < lyrics[i + 1].time)) {
-            if (i !== currentLine) {
-                lyricsDiv.textContent = lyrics[i].text;
-                currentLine = i;
-            }
-            found = true;
-            break;
-        }
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background: linear-gradient(to bottom, #070e18, #0d1521, #000000);
+    font-family: 'Forum', serif;
+    color: white;
+    overflow-y: auto;
+    overflow-x: hidden; 
+    min-width: 100vw;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    text-align: center;
+    padding: 15vh 20px 10vh;
+    max-width: 95%;
+}
+
+h1 {
+    font-family: 'Forum';
+    font-size: 4em;
+    margin-bottom: 30px;
+    color: #ffffff;
+    text-shadow: none;
+}
+
+.tree {
+    margin: 20px 0;
+}
+
+.tree img {
+    width: auto;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 0px;
+    position: relative;
+    z-index: 20;
+    transform: translateZ(0); 
+}
+
+#lyrics {
+    font-family: 'Forum';
+    font-size: 2.2em;
+    margin-top: 50px;
+    min-height: 80px;
+    color: #ffffff;
+    text-shadow: none;
+    opacity: 1;
+    transition: none;
+}
+
+.snowflake {
+    position: absolute;
+    top: -20px;
+    color: #ffffff;
+    font-size: 0.8em;
+    opacity: 0.7;
+    pointer-events: none;
+    animation: fall linear infinite;
+    z-index: 10;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(0) rotate(0deg);
     }
-    if (!found && currentLine !== 0) {
-        lyricsDiv.textContent = lyrics[0].text;
-        currentLine = 0;
+    100% {
+        transform: translateY(105vh) rotate(360deg);
     }
 }
 
-music.addEventListener('timeupdate', updateLyrics);
-music.addEventListener('play', updateLyrics);
-music.addEventListener('seeked', updateLyrics);
-music.addEventListener('loadstart', updateLyrics);
-
-document.body.addEventListener('click', () => {
-    music.play().catch(() => {});
-    updateLyrics();
-}, { once: true });
-
-window.addEventListener('load', () => {
-    updateLyrics();
-});
-
-function createSnowflake() {
-    const snowflake = document.createElement('div');
-    snowflake.classList.add('snowflake');
-    const flakes = ['❄', '❅', '❆', '✻', '✼'];
-    snowflake.textContent = flakes[Math.floor(Math.random() * flakes.length)];
-    snowflake.style.left = Math.random() * 100 + 'vw';
-    snowflake.style.animationDuration = (Math.random() * 10 + 10) + 's';
-    snowflake.style.fontSize = (Math.random() * 0.6 + 0.6) + 'em';
-    snowflake.style.opacity = Math.random() * 0.4 + 0.4;
-    document.body.appendChild(snowflake);
-    setTimeout(() => snowflake.remove(), 25000);
+.greeting-section {
+    width: 100%;
+    padding: 80px 20px 120px; /* Отступы для воздуха */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
 }
-setInterval(createSnowflake, 650);
 
-const greetingText = document.querySelector('.greeting-text');
-function checkScroll() {
-    if (!greetingText) return;
-    const rect = greetingText.getBoundingClientRect();
-    const windowHeight = window.innerHeight;
-    if (rect.top <= windowHeight * 0.8) {
-        greetingText.classList.add('visible');
+.greeting-text {
+    max-width: 800px;
+    text-align: center;
+    color: #ffffff;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1.5s ease-out;
+}
+
+.greeting-text.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.greeting-text h2 {
+    font-family: 'Forum';
+    font-size: 1.8em;      
+    font-weight: normal;
+    margin-bottom: 30px;
+    color: #ffffff;
+    white-space: nowrap;      
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.greeting-text p {
+    font-family: 'Forum';
+    font-size: 1.6em;        
+    line-height: 1;
+    margin-bottom: 25px;
+}
+
+.greeting-decor {
+    position: absolute;
+    font-size: 3em;
+    opacity: 0.4;
+    pointer-events: none;
+    animation: float 15s ease-in-out infinite;
+    z-index: 5;
+}
+
+.greeting-decor.left { left: 8%; top: 15%; }
+.greeting-decor.right { right: 8%; top: 35%; animation-delay: 5s; }
+.greeting-decor.small { font-size: 2em; left: 12%; top: 65%; animation-delay: 8s; }
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-30px) rotate(180deg); }
+}
+
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 3em;
+    }
+
+    #lyrics {
+        font-size: 1.8em;
+    }
+
+    .greeting-text h2 {
+        font-size: 1.5em;
+    }
+
+    .greeting-text p {
+        font-size: 1.4em;
+    }
+
+    .greeting-section {
+        padding: 60px 15px 100px;
     }
 }
-window.addEventListener('scroll', checkScroll);
-window.addEventListener('load', checkScroll);
+
