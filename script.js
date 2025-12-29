@@ -16,7 +16,7 @@ const lyrics = [
     { text: "this year,", time: 2000 },
     { text: "to save me from tears", time: 2000 },
     { text: "I'll give it to someone special", time: 3040 },
-    { text: "", time: 1000 }
+    { text: "", time: 100000 }
 ];
 
 const lyricsDiv = document.getElementById('lyrics');
@@ -75,5 +75,6 @@ function checkScroll() {
 }
 window.addEventListener('scroll', checkScroll);
 window.addEventListener('load', checkScroll);
+
 
 
