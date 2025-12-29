@@ -43,12 +43,9 @@ function showNextLine() {
 
 const music = document.getElementById('music');
 document.body.addEventListener('click', () => {
-    music.play().catch(() => {}); 
-}, { once: true });
-
-window.addEventListener('load', () => {
+    music.play().catch(() => {});
     setTimeout(showNextLine, 1000);
-});
+}, { once: true });
 
 function createSnowflake() {
     const snowflake = document.createElement('div');
