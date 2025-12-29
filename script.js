@@ -20,6 +20,8 @@ const lyrics = [
 ];
 
 const lyricsDiv = document.getElementById('lyrics');
+const music = document.getElementById('music');
+const playButton = document.getElementById('playButton');
 let index = 0;
 
 function showNextLine() {
@@ -41,11 +43,11 @@ function showNextLine() {
     }
 }
 
-const music = document.getElementById('music');
-document.body.addEventListener('click', () => {
+playButton.addEventListener('click', () => {
     music.play().catch(() => {});
     setTimeout(showNextLine, 1000);
-}, { once: true });
+    playButton.style.display = 'none'; // Скрываем кнопку после нажатия
+});
 
 function createSnowflake() {
     const snowflake = document.createElement('div');
@@ -57,9 +59,7 @@ function createSnowflake() {
     snowflake.style.fontSize = (Math.random() * 0.6 + 0.6) + 'em';
     snowflake.style.opacity = Math.random() * 0.4 + 0.4;
     document.body.appendChild(snowflake);
-    setTimeout(() => {
-        snowflake.remove();
-    }, 25000);
+    setTimeout(() => snowflake.remove(), 25000);
 }
 setInterval(createSnowflake, 650);
 
