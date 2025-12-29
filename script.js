@@ -1,60 +1,53 @@
 const lyrics = [
-    { text: "", time: 0 },
-    { text: "last christmas,", time: 16 },
-    { text: "I gave you my heart", time: 18 },
-    { text: "but the very next day,", time: 21 },
-    { text: "you gave it away", time: 23 },
-    { text: "", time: 26 },
-    { text: "this year,", time: 28 },
-    { text: "to save me from tears", time: 30 },
-    { text: "I'll give it to someone special", time: 32 },
-    { text: "", time: 36 },
-    { text: "last christmas,", time: 65 },
-    { text: "I gave you my heart", time: 67 },
-    { text: "but the very next day,", time: 70 },
-    { text: "you gave it away", time: 72 },
-    { text: "", time: 75 },
-    { text: "this year,", time: 77 },
-    { text: "to save me from tears", time: 79 },
-    { text: "I'll give it to someone special", time: 81 },
-    { text: "", time: 85 }
+    { text: "last christmas,", time: 1990 },
+    { text: "I gave you my heart", time: 1993 },
+    { text: "but the very next day,", time: 2067 },
+    { text: "you gave it away", time: 2000 },
+    { text: "", time: 1000 },
+    { text: "this year,", time: 2000 },
+    { text: "to save me from tears", time: 2000 },
+    { text: "I'll give it to someone special", time: 3065 },
+    { text: "", time: 1260 },
+    { text: "last christmas,", time: 1990 },
+    { text: "I gave you my heart", time: 1995 },
+    { text: "but the very next day,", time: 2100 },
+    { text: "you gave it away", time: 2000 },
+    { text: "", time: 1000 },
+    { text: "this year,", time: 2000 },
+    { text: "to save me from tears", time: 2000 },
+    { text: "I'll give it to someone special", time: 3040 },
+    { text: "", time: 1000 }
 ];
 
 const lyricsDiv = document.getElementById('lyrics');
-const music = document.getElementById('music');
-let currentLine = -1;
+let index = 0;
 
-function updateLyrics() {
-    const currentTime = music.currentTime || 0;
-    let found = false;
-    for (let i = 0; i < lyrics.length; i++) {
-        if (currentTime >= lyrics[i].time && (i === lyrics.length - 1 || currentTime < lyrics[i + 1].time)) {
-            if (i !== currentLine) {
-                lyricsDiv.textContent = lyrics[i].text;
-                currentLine = i;
-            }
-            found = true;
-            break;
-        }
-    }
-    if (!found && currentLine !== 0) {
-        lyricsDiv.textContent = lyrics[0].text;
-        currentLine = 0;
+function showNextLine() {
+    if (index < lyrics.length) {
+        const line = lyrics[index];
+        lyricsDiv.textContent = line.text;
+        lyricsDiv.classList.remove('visible');
+        setTimeout(() => {
+            lyricsDiv.classList.add('visible');
+        }, 100);
+        index++;
+        const delay = line.time || 3500;
+        setTimeout(showNextLine, delay);
+    } else {
+        setTimeout(() => {
+            index = 0;
+            showNextLine();
+        }, 100);
     }
 }
 
-music.addEventListener('timeupdate', updateLyrics);
-music.addEventListener('play', updateLyrics);
-music.addEventListener('seeked', updateLyrics);
-music.addEventListener('loadstart', updateLyrics);
-
+const music = document.getElementById('music');
 document.body.addEventListener('click', () => {
-    music.play().catch(() => {});
-    updateLyrics();
+    music.play().catch(() => {}); 
 }, { once: true });
 
 window.addEventListener('load', () => {
-    updateLyrics();
+    setTimeout(showNextLine, 1000);
 });
 
 function createSnowflake() {
@@ -67,16 +60,17 @@ function createSnowflake() {
     snowflake.style.fontSize = (Math.random() * 0.6 + 0.6) + 'em';
     snowflake.style.opacity = Math.random() * 0.4 + 0.4;
     document.body.appendChild(snowflake);
-    setTimeout(() => snowflake.remove(), 25000);
+    setTimeout(() => {
+        snowflake.remove();
+    }, 25000);
 }
 setInterval(createSnowflake, 650);
 
 const greetingText = document.querySelector('.greeting-text');
 function checkScroll() {
-    if (!greetingText) return;
     const rect = greetingText.getBoundingClientRect();
-    const windowHeight = window.innerHeight;
-    if (rect.top <= windowHeight * 0.8) {
+    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+    if (rect.top <= windowHeight * 0.8) {  
         greetingText.classList.add('visible');
     }
 }
